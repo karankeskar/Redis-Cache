@@ -5,6 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+    .AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = Configuration.GetConnectionString("Redis");
+        options.InstanceName = "RedisCache_";
+    });
 
 var app = builder.Build();
 

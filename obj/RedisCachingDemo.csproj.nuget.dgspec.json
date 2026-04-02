@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[10.0.5, )",
               "autoReferenced": true
+            },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[10.0.5, )"
             }
           },
           "imports": [
