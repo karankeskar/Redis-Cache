@@ -83,3 +83,9 @@
 /Users/karankeskar/Projects/RedisCachingDemo/obj/Debug/net10.0/RedisCachingDemo.pdb
 /Users/karankeskar/Projects/RedisCachingDemo/obj/Debug/net10.0/RedisCachingDemo.genruntimeconfig.cache
 /Users/karankeskar/Projects/RedisCachingDemo/obj/Debug/net10.0/ref/RedisCachingDemo.dll
+/Users/karankeskar/Projects/RedisCachingDemo/obj/Debug/net10.0/RedisCachingDemo.csproj.AssemblyReference.cache
+/Users/karankeskar/Projects/RedisCachingDemo/obj/Debug/net10.0/RedisCachingDemo.sourcelink.json
+/Users/karankeskar/Projects/RedisCachingDemo/bin/Debug/net10.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
+/Users/karankeskar/Projects/RedisCachingDemo/bin/Debug/net10.0/Pipelines.Sockets.Unofficial.dll
+/Users/karankeskar/Projects/RedisCachingDemo/bin/Debug/net10.0/StackExchange.Redis.dll
+/Users/karankeskar/Projects/RedisCachingDemo/obj/Debug/net10.0/RedisCac.93295103.Up2Date

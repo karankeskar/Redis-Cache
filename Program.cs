@@ -1,16 +1,19 @@
 using RedisCachingDemo.Components;
+using RedisCachingDemo.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddStackExchangeRedisCache(options =>
+    .AddInteractiveServerComponents();
+    
+builder.Services.AddStackExchangeRedisCache(options =>
     {
-        options.Configuration = Configuration.GetConnectionString("Redis");
+        options.Configuration = builder.Configuration.GetConnectionString("Redis");
         options.InstanceName = "RedisCachingDemo_";
     });
 
+builder.Services.AddSingleton<WeatherForecastService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

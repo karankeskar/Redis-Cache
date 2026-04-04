@@ -1,5 +1,6 @@
 ﻿@page "/weather"
-@attribute [StreamRendering]
+@* @attribute [StreamRendering] *@
+@rendermode InteractiveServer
 @using RedisCachingDemo.Data
 @using RedisCachingDemo.Extensions
 @inject WeatherForecastService ForecastService
@@ -11,12 +12,19 @@
 
 <p>This component demonstrates showing data.</p>
 
-@if (forecasts == null)
+<button class="btn btn-primary" @onclick = "LoadForecast">Load Forecast</button>
+
+@if(ForecastService is null && loadLocation == "")
+{
+    <p><em>Click the button the load the forecast</em></p>
+}
+else if (forecasts is null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
+    <div class="h3 @isCacheData">@loadLocation</div>
     <table class="table">
         <thead>
             <tr>
@@ -43,9 +51,32 @@ else
 @code {
     private WeatherForecast[]? forecasts;
 
-    protected override async Task OnInitializedAsync()
+    private string loadLocation=""; // This is going to store the value of where we are loading the data from, if nothing in cache load from DB 
+    private string isCacheData = ""; // To show where is the data coming from db or cache
+    // This function will run once the page is loaded.
+    @* protected override async Task OnInitializedAsync()
     {
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         forecasts = await ForecastService.GetForecastAsync(startDate);
+    } *@
+
+    private async Task LoadForecast(){
+        forecasts = null;
+        loadLocation = null;
+        string recordKey = "WeatherForecast_"+DateTime.Now.ToString("yyyyMMdd_hhmm");
+        // This gets the record of type weather forecast [], with the record key
+        forecasts = await cache.GetRecordAsync<WeatherForecast[]>(recordKey);
+        
+        if(forecasts is null){
+            // Get the data from the API/DB
+            forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+            // Showcase exact time when the API data was loaded onto the cache.
+            loadLocation = $"Loaded from API at {DateTime.Now}";
+            isCacheData = "";
+            await cache.SetRecordAsync(recordKey, forecasts);
+        }else{
+            loadLocation = $"Loaded from the cache at {DateTime.Now}";
+            isCacheData = "text-danger";
+        }
     }
 }
