@@ -13,7 +13,7 @@ namespace RedisCachingDemo.Extensions
             // this gives how long the things will stay in the cache, make them expire, we do not want things sitting in cache indefinitely
             var options = new DistributedCacheEntryOptions();
             //  This gives the value default of 60 seconds, once I put the item in the cache the item will live for 60 seconds, this method forces to give a time. Always make the cache short.
-            options.AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromSeconds(60);
+            options.AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromMinutes(5);
             // if we do not use the cache item for sometime, go and get new data when asked again.
             options.SlidingExpiration = unusedExpireTime;
             // So as the data declared or accepted is of any type, this is used to serialize the data in json format, which is a string
